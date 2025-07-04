@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './AppointmentForm.css';
 
-// This component receives an 'onSubmit' function prop to handle form data
 const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -10,7 +9,6 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Pass the form data to the parent component (DoctorCard)
         onSubmit({ name, phoneNumber, dateOfAppointment, timeSlot });
     };
 
@@ -37,6 +35,7 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
                         required
                     />
                 </div>
+                {/* Date of Appointment Field */}
                 <div className="form-group">
                     <label htmlFor="date">Date of Appointment</label>
                     <input
@@ -47,6 +46,7 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
                         required
                     />
                 </div>
+                {/* Time Slot Field */}
                 <div className="form-group">
                     <label htmlFor="time-slot">Book Time Slot</label>
                     <select

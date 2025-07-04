@@ -2,22 +2,37 @@ import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './DoctorCard.css';
-import AppointmentForm from '../AppointmentForm/AppointmentForm'; // 1. Import the new form
+import AppointmentForm from '../AppointmentForm/AppointmentForm';
 import { v4 as uuidv4 } from 'uuid';
 
-const DoctorCard = ({ doctor }) => {
+// Accept the showNotification prop from the parent component
+const DoctorCard = ({ doctor, showNotification }) => {
     const [appointments, setAppointments] = useState([]);
 
     const handleFormSubmit = (appointmentData) => {
         const newAppointment = {
             id: uuidv4(),
+            doctor, // Include doctor details
             ...appointmentData,
         };
         setAppointments([newAppointment]);
+        
+        // --- ADDED THIS LOGIC ---
+        // Save to session storage for the "My Appointments" page
+        sessionStorage.setItem('bookedAppointment', JSON.stringify(newAppointment));
+        // Trigger the global notification
+        if (showNotification) {
+            showNotification(newAppointment);
+        }
+        // -------------------------
     };
 
     const handleCancel = () => {
         setAppointments([]);
+        // --- ADDED THIS LOGIC ---
+        // Clear the appointment from session storage
+        sessionStorage.removeItem('bookedAppointment');
+        // -------------------------
     };
 
     const renderStars = () => {
@@ -55,7 +70,6 @@ const DoctorCard = ({ doctor }) => {
                                 <div className="doctor-card-detail-name">Dr. {doctor.name}</div>
                                 <div className="doctor-card-detail-speciality">{doctor.specialty}</div>
                             </div>
-
                             {appointments.length > 0 ? (
                                 <div className="appointment-details">
                                     <h3>Appointment Booked!</h3>
@@ -72,7 +86,6 @@ const DoctorCard = ({ doctor }) => {
                                     ))}
                                 </div>
                             ) : (
-                                // 2. Use the new AppointmentForm component
                                 <AppointmentForm
                                     doctorName={doctor.name}
                                     doctorSpeciality={doctor.specialty}
