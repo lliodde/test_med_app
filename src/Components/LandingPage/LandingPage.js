@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // 1. Import the Link component
 import './LandingPage.css';
 
-// The component function is named "LandingPage"
 const LandingPage = () => {
   return (
     <div className="landing-container">
@@ -14,11 +14,13 @@ const LandingPage = () => {
           StayHealthy is dedicated to improving healthcare in remote areas.
           Connect with doctors anytime, anywhere.
         </p>
-        <button className="get-started-btn">Get Started</button>
+        {/* 2. Wrap the button with a Link to the /find-doctor page */}
+        <Link to="/find-doctor">
+          <button className="get-started-btn">Get Started</button>
+        </Link>
       </header>
     </div>
   );
 };
 
-// You must export the SAME name as the component function
 export default LandingPage;

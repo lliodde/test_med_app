@@ -1,0 +1,16 @@
+.booking-consultation-container {
+    padding: 1rem;
+}
+
+.find-doctor-search-container {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 2rem;
+}
+
+.doctor-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
