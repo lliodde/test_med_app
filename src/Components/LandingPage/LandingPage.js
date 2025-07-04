@@ -1,7 +1,8 @@
 import React from 'react';
-import './LandingPage.css'; // Import the stylesheet
+import './LandingPage.css';
 
-const Landing_Page = () => {
+// The component function is named "LandingPage"
+const LandingPage = () => {
   return (
     <div className="landing-container">
       <header className="landing-header">
@@ -19,4 +20,5 @@ const Landing_Page = () => {
   );
 };
 
-export default Landing_Page;
+// You must export the SAME name as the component function
+export default LandingPage;

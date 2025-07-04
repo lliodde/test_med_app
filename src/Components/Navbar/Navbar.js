@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import the Link component
 import './Navbar.css';
 
 const Navbar = () => {
   return (
     <nav>
       <div className="nav__logo">
-        <a href="/">
+        {/* This link now uses the Link component */}
+        <Link to="/">
           StayHealthy
-          {/* CORRECTED: Complete SVG code with self-closing path tags */}
           <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{ fill: '#3685fb' }}>
             <title>Doctor With Stethoscope SVG icon</title>
             <g>
@@ -18,18 +19,19 @@ const Navbar = () => {
               </g>
             </g>
           </svg>
-        </a>
+        </Link>
       </div>
 
       <div className="nav__icon">
         <i className="fa fa-bars"></i>
       </div>
 
+      {/* Navigation links updated to use the Link component */}
       <ul className="nav__links active">
-        <li className="link"><a href="/">Home</a></li>
-        <li className="link"><a href="/appointments">Appointments</a></li>
-        <li className="link"><a href="/signup" className="btn1">Sign Up</a></li>
-        <li className="link"><a href="/login" className="btn1">Login</a></li>
+        <li className="link"><Link to="/">Home</Link></li>
+        <li className="link"><Link to="/appointments">Appointments</Link></li>
+        <li className="link"><Link to="/signup" className="btn1">Sign Up</Link></li>
+        <li className="link"><Link to="/login" className="btn1">Login</Link></li>
       </ul>
     </nav>
   );

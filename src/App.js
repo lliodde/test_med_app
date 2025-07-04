@@ -3,21 +3,20 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Import your components
 import Navbar from './Components/Navbar/Navbar';
-import Landing_Page from './Components/Landing_Page/Landing_Page'; // Correct import path
+import LandingPage from './Components/LandingPage/LandingPage';
+import SignUp from './Components/SignUp/SignUp'; // Import Sign Up
+import Login from './Components/Login/Login';       // Import Login
 
 function App() {
   return (
     <BrowserRouter>
       <>
         <Navbar />
-        {/* The <Routes> wrapper tells the router where to render pages */}
         <Routes>
-          {/* This sets the Landing_Page as the default home page */}
-          <Route path="/" element={<Landing_Page />} />
-          
-          {/* You will add other routes here, for example: */}
-          {/* <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/signup" element={<SignUp />} /> */}
+          {/* Add all the routes for your pages */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </>
     </BrowserRouter>
