@@ -10,6 +10,8 @@ import BookingConsultation from './Components/BookingConsultation';
 import Appointments from './Components/Appointments/Appointments';
 import Reviews from './Components/Reviews/Reviews'; // Import the Reviews component
 import Notification from './Components/Notification/Notification';
+import ProfilePage from './Components/ProfilePage/ProfilePage';
+import ReportsLayout from './Components/ReportsLayout/ReportsLayout';
 
 function App() {
   const [notification, setNotification] = useState(null);
@@ -39,6 +41,8 @@ function App() {
           <Route path="/appointments" element={<Appointments />} />
           {/* This is the missing route that needs to be added */}
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/reports" element={<ReportsLayout />} />
         </Routes>
       </>
     </BrowserRouter>
