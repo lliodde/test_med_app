@@ -5,39 +5,24 @@ import './DoctorCard.css';
 import AppointmentForm from '../AppointmentForm/AppointmentForm';
 import { v4 as uuidv4 } from 'uuid';
 
-// Accept the showNotification prop from the parent component
 const DoctorCard = ({ doctor, showNotification }) => {
-    const [appointments, setAppointments] = useState([]);
+    const [appointment, setAppointment] = useState(null);
 
     const handleFormSubmit = (appointmentData) => {
-        const newAppointment = {
-            id: uuidv4(),
-            doctor, // Include doctor details
-            ...appointmentData,
-        };
-        setAppointments([newAppointment]);
-        
-        // --- ADDED THIS LOGIC ---
-        // Save to session storage for the "My Appointments" page
+        const newAppointment = { id: uuidv4(), doctor, ...appointmentData };
+        setAppointment(newAppointment);
         sessionStorage.setItem('bookedAppointment', JSON.stringify(newAppointment));
-        // Trigger the global notification
         if (showNotification) {
             showNotification(newAppointment);
         }
-        // -------------------------
     };
 
     const handleCancel = () => {
-        setAppointments([]);
-        // --- ADDED THIS LOGIC ---
-        // Clear the appointment from session storage
+        setAppointment(null);
         sessionStorage.removeItem('bookedAppointment');
-        // -------------------------
     };
 
-    const renderStars = () => {
-        return Array.from({ length: doctor.rating }, (_, i) => <span key={i}>⭐</span>);
-    };
+    const renderStars = () => Array.from({ length: doctor.rating }, (_, i) => <span key={i}>⭐</span>);
 
     return (
         <div className="doctor-card-container">
@@ -53,16 +38,7 @@ const DoctorCard = ({ doctor, showNotification }) => {
                 <div className="doctor-card-detail-rating">{renderStars()}</div>
             </div>
             <div className="doctor-card-options-container">
-                <Popup
-                    trigger={
-                        <button className="book-appointment-btn">
-                            Book Appointment
-                            <span>No Booking Fee</span>
-                        </button>
-                    }
-                    modal
-                    nested
-                >
+                <Popup trigger={<button className="book-appointment-btn">Book Appointment</button>} modal nested>
                     {(close) => (
                         <div className="modal-container">
                             <button className="close-modal-btn" onClick={close}>&times;</button>
@@ -70,27 +46,19 @@ const DoctorCard = ({ doctor, showNotification }) => {
                                 <div className="doctor-card-detail-name">Dr. {doctor.name}</div>
                                 <div className="doctor-card-detail-speciality">{doctor.specialty}</div>
                             </div>
-                            {appointments.length > 0 ? (
+                            {appointment ? (
                                 <div className="appointment-details">
                                     <h3>Appointment Booked!</h3>
-                                    {appointments.map((appointment) => (
-                                        <div className="booked-info" key={appointment.id}>
-                                            <p><strong>Name:</strong> {appointment.name}</p>
-                                            <p><strong>Phone:</strong> {appointment.phoneNumber}</p>
-                                            <p><strong>Date:</strong> {appointment.dateOfAppointment}</p>
-                                            <p><strong>Time:</strong> {appointment.timeSlot}</p>
-                                            <button className="cancel-btn" onClick={() => { handleCancel(); close(); }}>
-                                                Cancel Appointment
-                                            </button>
-                                        </div>
-                                    ))}
+                                    <div className="booked-info">
+                                        <p><strong>Name:</strong> {appointment.name}</p>
+                                        <p><strong>Phone:</strong> {appointment.phoneNumber}</p>
+                                        <p><strong>Date:</strong> {appointment.dateOfAppointment}</p>
+                                        <p><strong>Time:</strong> {appointment.timeSlot}</p>
+                                        <button className="cancel-btn" onClick={() => { handleCancel(); close(); }}>Cancel Appointment</button>
+                                    </div>
                                 </div>
                             ) : (
-                                <AppointmentForm
-                                    doctorName={doctor.name}
-                                    doctorSpeciality={doctor.specialty}
-                                    onSubmit={handleFormSubmit}
-                                />
+                                <AppointmentForm onSubmit={handleFormSubmit} />
                             )}
                         </div>
                     )}

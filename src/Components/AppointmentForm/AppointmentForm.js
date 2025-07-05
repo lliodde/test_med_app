@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AppointmentForm.css';
 
-const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
+const AppointmentForm = ({ onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [dateOfAppointment, setDateOfAppointment] = useState('');
@@ -17,44 +17,19 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
             <form onSubmit={handleFormSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
+                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="phone">Phone Number</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        required
-                    />
+                    <input type="tel" id="phone" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
                 </div>
-                {/* Date of Appointment Field */}
                 <div className="form-group">
                     <label htmlFor="date">Date of Appointment</label>
-                    <input
-                        type="date"
-                        id="date"
-                        value={dateOfAppointment}
-                        onChange={(e) => setDateOfAppointment(e.target.value)}
-                        required
-                    />
+                    <input type="date" id="date" value={dateOfAppointment} onChange={(e) => setDateOfAppointment(e.target.value)} required />
                 </div>
-                {/* Time Slot Field */}
                 <div className="form-group">
                     <label htmlFor="time-slot">Book Time Slot</label>
-                    <select
-                        id="time-slot"
-                        value={timeSlot}
-                        onChange={(e) => setTimeSlot(e.target.value)}
-                        required
-                    >
+                    <select id="time-slot" value={timeSlot} onChange={(e) => setTimeSlot(e.target.value)} required>
                         <option value="" disabled>Select a time slot</option>
                         <option value="10:00 AM">10:00 AM</option>
                         <option value="11:00 AM">11:00 AM</option>

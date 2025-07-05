@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // 1. Import the Link component
+import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -14,8 +14,8 @@ const LandingPage = () => {
           StayHealthy is dedicated to improving healthcare in remote areas.
           Connect with doctors anytime, anywhere.
         </p>
-        {/* 2. Wrap the button with a Link to the /find-doctor page */}
-        <Link to="/find-doctor">
+        {/* The Link now points to the correct page */}
+        <Link to="/booking-consultation">
           <button className="get-started-btn">Get Started</button>
         </Link>
       </header>

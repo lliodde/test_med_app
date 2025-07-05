@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import DoctorCard from './DoctorCard/DoctorCard';
+// This import path is now corrected
 import FindDoctorSearch from './FindDoctorSearch/FindDoctorSearch';
 import './BookingConsultation.css';
 
-// Your expanded list of sample doctors
 const allDoctors = [
     { name: 'Jiao Yang', specialty: 'Dentist', experience: 9, rating: 5 },
     { name: 'Denis Raj', specialty: 'Dentist', experience: 24, rating: 4 },
@@ -25,22 +25,31 @@ const allDoctors = [
     { name: 'Charles Hernandez', specialty: 'General Physician', experience: 13, rating: 4 }
 ];
 
-// This is the correct, single definition of the component
-// It accepts the showNotification prop from App.js
 const BookingConsultation = ({ showNotification }) => {
-    const [doctors] = useState(allDoctors);
+    // The unused 'doctors' and 'setDoctors' state has been removed for now
+    const [filteredDoctors, setFilteredDoctors] = useState(allDoctors);
+
+    const handleSearch = (searchText) => {
+        if (searchText === '') {
+            setFilteredDoctors(allDoctors);
+        } else {
+            const filtered = allDoctors.filter(
+                (doctor) =>
+                    doctor.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                    doctor.specialty.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setFilteredDoctors(filtered);
+        }
+    };
 
     return (
         <div className="booking-consultation-container">
-            {/* Render the search component */}
             <div className="find-doctor-search-container">
-                <FindDoctorSearch />
+                <FindDoctorSearch onSearch={handleSearch} />
             </div>
 
-            {/* Render the list of doctor cards */}
             <div className="doctor-list-container">
-                {doctors.map((doctor, index) => (
-                    // Pass the showNotification function down to each DoctorCard
+                {filteredDoctors.map((doctor, index) => (
                     <DoctorCard 
                         key={index} 
                         doctor={doctor} 
