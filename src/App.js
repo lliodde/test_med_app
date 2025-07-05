@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Import your components
+// Import all your page components
 import Navbar from './Components/Navbar/Navbar';
 import LandingPage from './Components/LandingPage/LandingPage';
 import SignUp from './Components/SignUp/SignUp';
 import Login from './Components/Login/Login';
 import BookingConsultation from './Components/BookingConsultation';
 import Appointments from './Components/Appointments/Appointments';
+import Reviews from './Components/Reviews/Reviews'; // Import the Reviews component
 import Notification from './Components/Notification/Notification';
 
 function App() {
   const [notification, setNotification] = useState(null);
+
+  const showNotification = (details) => {
+    setNotification(details);
+  };
 
   return (
     <BrowserRouter>
@@ -29,9 +34,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route 
             path="/booking-consultation" 
-            element={<BookingConsultation showNotification={setNotification} />} 
+            element={<BookingConsultation showNotification={showNotification} />} 
           />
           <Route path="/appointments" element={<Appointments />} />
+          {/* This is the missing route that needs to be added */}
+          <Route path="/reviews" element={<Reviews />} />
         </Routes>
       </>
     </BrowserRouter>

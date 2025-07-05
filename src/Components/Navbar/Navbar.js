@@ -4,26 +4,26 @@ import './Navbar.css';
 
 const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState(''); // New state for the user's name
+    const [userName, setUserName] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const authToken = sessionStorage.getItem('auth-token');
         if (authToken) {
             setIsLoggedIn(true);
-            // Get the name from session storage and display it
             const email = sessionStorage.getItem('email');
-            // Extract the name from before the @ symbol
-            const name = email.split('@')[0]; 
-            setUserName(name);
+            if (email) {
+                const name = email.split('@')[0];
+                setUserName(name);
+            }
         }
     }, []);
 
     const handleLogout = () => {
         sessionStorage.removeItem('auth-token');
-        sessionStorage.removeItem('name');
-        sessionStorage.removeItem('phone');
         sessionStorage.removeItem('email');
+        // Also clear the appointment when logging out
+        sessionStorage.removeItem('bookedAppointment');
         setIsLoggedIn(false);
         setUserName('');
         navigate('/');
@@ -35,7 +35,6 @@ const Navbar = () => {
             <div className="nav__logo">
                 <Link to="/">
                     StayHealthy
-                    {/* SVG Icon */}
                     <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{ fill: '#3685fb' }}>
                         <title>Doctor With Stethoscope SVG icon</title>
                         <g><g>
@@ -54,6 +53,8 @@ const Navbar = () => {
             <ul className="nav__links active">
                 <li className="link"><Link to="/">Home</Link></li>
                 <li className="link"><Link to="/appointments">Appointments</Link></li>
+                {/* ADDED: Link to the Reviews page */}
+                <li className="link"><Link to="/reviews">Reviews</Link></li>
 
                 {!isLoggedIn ? (
                     <>
@@ -62,7 +63,6 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        {/* Welcome message is now displayed here */}
                         <li className="link welcome-user">Welcome, {userName}</li>
                         <li className="link">
                             <button onClick={handleLogout} className="btn1">Logout</button>

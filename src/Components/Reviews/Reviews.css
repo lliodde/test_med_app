@@ -1,0 +1,63 @@
+.reviews-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+.reviews-container h2 {
+    text-align: center;
+}
+.reviews-container p {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+.reviews-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+.reviews-table-container th, .reviews-table-container td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+.reviews-table-container th {
+    background-color: #f8f9fa;
+}
+.reviews-table-container td {
+    text-align: center;
+}
+.provide-review-btn {
+    background-color: #3685fb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.reviewed-yes {
+    color: green;
+    font-weight: bold;
+}
+.reviewed-no {
+    color: red;
+    font-weight: bold;
+}
+/* Modal styles */
+.modal-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+}
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
