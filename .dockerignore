@@ -1,0 +1,14 @@
+# Ignore dependencies and build artifacts
+node_modules
+build
+
+# Ignore the server directory for this front-end build
+server/
+
+# Ignore git files
+.git
+.gitignore
+
+# Ignore the ignore file itself and other Dockerfiles
+.dockerignore
+Dockerfile-server
